@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión - SmartDish</title>
+    <script type="module" src="auth.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #f8f9fa, #e0f7fa);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            color: #333;
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            background-color: #0288d1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #0277bd;
+        }
+
+        .btn-google {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            background-color: #ffffff;
+            color: #444;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: box-shadow 0.3s, background-color 0.3s;
+        }
+
+        .btn-google:hover {
+            background-color: #f5f5f5;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-google img {
+            vertical-align: middle;
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .link a {
+            color: #0288d1;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .link a:hover {
+            color: #01579b;
+            text-decoration: underline;
+        }
+
+        .forgot-password {
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        .page-title {
+            position: absolute;
+            top: 30px;
+            width: 100%;
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: #0288d1;
+            animation: slideIn 1.2s ease-out;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .input-container {
+            position: relative;
+        }
+
+        .input-container input {
+            width: 100%;
+            padding-right: 40px;
+            /* espacio para el ícono */
+        }
+
+        .toggle-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 20px;
+            color: #0288d1;
+            user-select: none;
+        }
+
+        .toggle-icon:hover {
+            color: #0277bd;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="page-title">🐾 SmartDish</h1>
+
+    <div class="container">
+        <h2>Iniciar Sesión</h2>
+        <input type="email" id="email" placeholder="Correo electrónico">
+        <div class="input-container">
+            <input type="password" id="password" placeholder="Contraseña">
+            <span id="toggle-password" class="toggle-icon">👁️</span>
+        </div>
+        <button id="login">Entrar</button>
+        <button id="login-google" class="btn-google">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" width="20">
+            Iniciar sesión con Google
+        </button>
+        <div class="link">
+            ¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a>
+            <br>
+            <a href="recuperar.html" class="forgot-password">¿Olvidaste tu contraseña?</a>
+        </div>
+
+    </div>
+</body>
+
+</html>

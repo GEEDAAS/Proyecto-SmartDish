@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartDish - Control de Comida</title>
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+  <script type="module" src="main.js"></script>
+  <style>
+    :root {
+      --primario: #4CAF50;
+      --primario-oscuro: #388E3C;
+      --fondo: linear-gradient(135deg, #e0f7fa, #ffffff);
+      --texto: #333;
+      --sombra: rgba(0, 0, 0, 0.1);
+      --estado-bg: #fff3cd;
+      --estado-borde: #ffecb5;
+      --estado-texto: #856404;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--fondo);
+      color: var(--texto);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 25px var(--sombra);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .supervision-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 25px var(--sombra);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .camara-container {
+      width: 100%;
+      height: 240px;
+      background-color: #e3f2fd;
+      border: 4px solid #0288d1;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    .camara-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    h1,
+    h3 {
+      font-size: 2rem;
+      margin-bottom: 25px;
+      color: var(--primario-oscuro);
+    }
+
+    button {
+      background-color: var(--primario);
+      color: white;
+      font-size: 1.1rem;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px var(--sombra);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: var(--primario-oscuro);
+      transform: scale(1.05);
+    }
+
+    .btn-logout {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #ef5350;
+      color: white;
+      padding: 10px 20px;
+      font-size: 14px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s;
+    }
+
+    .btn-logout:hover {
+      background-color: #d32f2f;
+    }
+
+    #estado {
+      margin-top: 30px;
+      padding: 25px;
+      background-color: var(--estado-bg);
+      color: var(--estado-texto);
+      border-left: 5px solid var(--estado-borde);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px var(--sombra);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 1rem;
+      text-align: left;
+    }
+
+    #comida {
+      font-weight: bold;
+      color: #d32f2f;
+    }
+
+    .estado-linea {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .estado-linea span:first-child {
+      font-weight: 500;
+    }
+
+    .estado-valor {
+      font-weight: bold;
+      min-width: 120px;
+      text-align: right;
+      color: #d32f2f;
+    }
+
+    .contenedor-principal {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+      max-width: 1280px;
+    }
+
+    @media (max-width: 900px) {
+      .contenedor-principal {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      #estado {
+        font-size: 0.95rem;
+        padding: 20px;
+      }
+
+      .estado-linea {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .estado-valor {
+        text-align: left;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <button id="logout" class="btn-logout">Cerrar sesión</button>
+
+  <div class="contenedor-principal">
+    <div class="card">
+      <h1>Control de Comida</h1>
+      <button id="btn-dispensar">Dispensar Comida</button>
+      <button id="btn-dispensar-agua" style="margin-top: 10px; background-color: #2196F3;">
+        💧 Dispensar Agua
+      </button>
+
+      <div id="estado">
+        <div class="estado-linea">
+          <span>Estado del plato:</span>
+          <span id="comida" class="estado-valor">Desconocido</span>
+        </div>
+        <div class="estado-linea">
+          <span>Temperatura:</span>
+          <span id="temp" class="estado-valor">-- °C</span>
+        </div>
+        <div class="estado-linea">
+          <span>Humedad:</span>
+          <span id="hum" class="estado-valor">-- %</span>
+        </div>
+        <div class="estado-linea">
+          <span>LED Azul:</span>
+          <span id="led-dispensando" class="estado-valor">Apagado</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="supervision-card">
+      <h3>Supervisión Visual</h3>
+      <button id="capturar-btn">📸 Capturar Foto</button>
+      <button id="ver-foto-btn" style="display: none; margin-top: 15px;">
+        🖼️ Ver Foto Capturada
+      </button>
+      <button id="analizar-foto-btn" style="display: none;">🔍 Mandar foto a IA</button>
+      <p id="resultado-ia" style="margin-top: 10px; font-weight: bold;"></p>
+      <img id="img-result" style="display: none; margin-top: 10px; max-width: 100%;">
+    </div>
+
+    <div class="card">
+      <h3>Lectura de Peso del Plato</h3>
+      <p style="font-size: 2rem; margin: 20px 0;">
+        <span id="peso">--</span> g
+      </p>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -33,18 +33,18 @@ SmartDish está diseñado para ofrecer una solución automatizada y eficiente pa
 ```
 Proyecto-SmartDish/
 │
-├── Codigos py/             # Código para el control físico (ESP32 y ESP32-CAM)
-│   ├── esp32_control.py    # Control del servomotor, bomba, sensores y LEDs
-│   ├── esp32cam.py         # Captura de imágenes y envío a la IA
-│   └── boot.py             # Configuración de red para la ESP32-CAM
+├── Codigos py/                  # Código para el control físico (ESP32 y ESP32-CAM)
+│   ├── ProyectoEsp32.py         # Control del servomotor, bomba, sensores y LEDs
+│   ├── ProyectoEsp32-CAM.py     # Captura de imágenes y envío a la IA
+│   └── boot.py                  # Configuración de red para la ESP32-CAM
 │
-├── SmartDish_IA/           # IA para reconocimiento de imágenes
-│   └── model/              # Contiene el modelo YOLOv5 (requiere clonar)
+├── SmartDish_IA/                # IA para reconocimiento de imágenes
+│   └── model/                   # Contiene el modelo YOLOv5 (requiere clonar)
 │
-├── SmartDish/              # Página web y sistema de usuario
+├── SmartDish/                   # Página web y sistema de usuario
 │   └── (colocar en htdocs de XAMPP para ejecución)
 │
-└── README.md               # Este archivo
+└── README.md                    
 ```
 
 ---

@@ -9,7 +9,7 @@
 
 SmartDish está diseñado para ofrecer una solución automatizada y eficiente para el cuidado de mascotas. Utiliza:
 
-- Una **ESP32** para controlar los componentes físicos (servomotor, bomba de agua, sensores y LEDs).
+- Una **ESP32** para controlar los componentes físicos (servomotor, bomba de agua mediante relevador, sensores y LEDs).
 - Una **ESP32-CAM** para capturar imágenes y detectar la presencia de la mascota.
 - Un modelo de **IA basado en YOLOv5** para el reconocimiento visual (actualmente entrenado para detectar perros).
 - Una **interfaz web** desarrollada en HTML y JavaScript para interactuar con el sistema.
@@ -18,12 +18,13 @@ SmartDish está diseñado para ofrecer una solución automatizada y eficiente pa
 
 ## 🧠 Características
 
-- 🥣 Dispensación automática de alimento y agua
-- 💡 Control de tres LEDs (verde, rojo y azul)
-- 🌡️ Monitoreo ambiental con sensores (LDR, DHT11, celda de carga)
-- 📷 Captura de imagen y análisis con IA para detectar mascotas
-- 🔐 Registro e inicio de sesión de usuarios (Google o correo/contraseña)
-- 🌐 Interfaz de usuario accesible desde navegador con XAMPP
+- 🥣 Dispensación automática de alimento y agua  
+- 💡 Control de tres LEDs (verde, rojo y azul)  
+- 🌡️ Monitoreo ambiental con sensores (LDR, DHT11, celda de carga)  
+- 📷 Captura de imagen y análisis con IA para detectar mascotas  
+- 🔐 Registro e inicio de sesión de usuarios (Google o correo/contraseña)  
+- 🌐 Interfaz de usuario accesible desde navegador con XAMPP  
+- ⚡ Control seguro de la bomba mediante **relevador de 12V**
 
 ---
 
@@ -51,18 +52,19 @@ Proyecto-SmartDish/
 ## ⚙️ Requisitos
 
 ### 🧰 Hardware
-- ESP32
-- ESP32-CAM
-- Servomotor
-- Bomba de agua
-- LEDs (verde, rojo, azul)
-- LDR, DHT11, celda de carga
+- ESP32  
+- ESP32-CAM  
+- **Relevador de 12V para la bomba de agua**  
+- Bomba de agua  
+- Servomotor  
+- LEDs (verde, rojo, azul)  
+- LDR, DHT11, celda de carga  
 
 ### 💻 Software
-- Python 3
-- Librerías: OpenCV, requests, flask, etc.
-- XAMPP
-- YOLOv5 (clonar desde [ultralytics/yolov5](https://github.com/ultralytics/yolov5))
+- Python 3  
+- Librerías: OpenCV, requests, flask, etc.  
+- XAMPP  
+- YOLOv5 (clonar desde [ultralytics/yolov5](https://github.com/ultralytics/yolov5))  
 
 ---
 
@@ -89,7 +91,7 @@ git clone https://github.com/ultralytics/yolov5
 
 ### 4. Configurar la Página Web
 
-- Mover la carpeta `SmartDish/` a la carpeta `htdocs` de XAMPP.
+- Mover la carpeta `SmartDish/` a la carpeta `htdocs` de XAMPP.  
 - Iniciar Apache desde el panel de XAMPP.
 
 ### 5. Acceder a la Interfaz

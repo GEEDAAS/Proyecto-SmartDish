@@ -54,7 +54,7 @@ Proyecto-SmartDish/
 ### 🧰 Hardware
 - ESP32  
 - ESP32-CAM  
-- **Relevador de 12V para la bomba de agua**  
+- Relevador de 12V para la bomba de agua  
 - Bomba de agua  
 - Servomotor  
 - LEDs (verde, rojo, azul)  
